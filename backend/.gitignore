@@ -1,0 +1,46 @@
+# Build output
+bin/
+obj/
+out/
+
+# User-specific files
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+# IDE / editor
+.vs/
+.vscode/
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+
+# Logs
+*.log
+logs/
+
+# Test results
+TestResults/
+*.trx
+
+# ASP.NET / tooling
+wwwroot/lib/
+
+# Node dependencies (if frontend tooling exists in backend)
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.env.*
+
+# Local settings
+appsettings.Development.json
