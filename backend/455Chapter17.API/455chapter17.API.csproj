@@ -9,6 +9,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="..\..\scripts\run_fraud_scoring.py" CopyToPublishDirectory="PreserveNewest">
+      <Link>scripts\run_fraud_scoring.py</Link>
+    </Content>
+    <Content Include="..\..\scripts\requirements.txt" CopyToPublishDirectory="PreserveNewest">
+      <Link>scripts\requirements.txt</Link>
+    </Content>
+    <Content Include="..\..\crispdm-pipeline-model\fraud_model.sav" CopyToPublishDirectory="PreserveNewest">
+      <Link>crispdm-pipeline-model\fraud_model.sav</Link>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.4">

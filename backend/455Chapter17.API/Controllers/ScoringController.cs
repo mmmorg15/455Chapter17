@@ -14,10 +14,23 @@ public class ScoringController(AppDbContext db, IWebHostEnvironment env, ILogger
     [HttpPost("run")]
     public async Task<IActionResult> RunScoring()
     {
-        var repoRoot = Path.GetFullPath(Path.Combine(env.ContentRootPath, "..", ".."));
-        var scriptPath = Path.Combine(repoRoot, "scripts", "run_fraud_scoring.py");
+        // In production (Railway), scripts and model are published alongside the app.
+        // In development, fall back two levels up to the repo root.
+        var contentRoot = env.ContentRootPath;
+        var scriptPath = Path.Combine(contentRoot, "scripts", "run_fraud_scoring.py");
+        if (!System.IO.File.Exists(scriptPath))
+        {
+            var repoRoot = Path.GetFullPath(Path.Combine(contentRoot, "..", ".."));
+            scriptPath = Path.Combine(repoRoot, "scripts", "run_fraud_scoring.py");
+        }
+
         var modelPath = Environment.GetEnvironmentVariable("FRAUD_MODEL_PATH")
-            ?? Path.Combine(repoRoot, "crispdm-pipeline-model", "fraud_model.sav");
+            ?? Path.Combine(contentRoot, "crispdm-pipeline-model", "fraud_model.sav");
+        if (!System.IO.File.Exists(modelPath))
+        {
+            var repoRoot = Path.GetFullPath(Path.Combine(contentRoot, "..", ".."));
+            modelPath = Path.Combine(repoRoot, "crispdm-pipeline-model", "fraud_model.sav");
+        }
         var pythonExecutable = Environment.GetEnvironmentVariable("PYTHON_EXECUTABLE");
         var pythonVersionSelector = Environment.GetEnvironmentVariable("PYTHON_VERSION_SELECTOR");
 
